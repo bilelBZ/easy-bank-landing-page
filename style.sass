@@ -1,0 +1,459 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap')
+
+// color variables
+$dark-blue: hsl(233, 26%, 24%)
+$lime-green: hsl(136, 65%, 51%)
+$bright-cyan: hsl(192, 70%, 51%)
+$gradient: linear-gradient(to right, $lime-green, $bright-cyan)
+$grayish-blue: hsl(233, 8%, 62%)
+$light-grayish-blue: hsl(220, 16%, 96%)
+$very-light-gray: hsl(0, 0%, 98%)
+$white: hsl(0, 0%, 100%)
+$green: hsl(170, 80%, 42%)
+
+// media query mixin
+$mobile: 420px
+$tablet: 768px
+
+=media_query($view_port)
+  @media (max-width: $view_port)
+    @content
+
+//-------------------------- Global styles -------------------------
+
+*, *::before, *::after
+  box-sizing: border-box
+
+html
+  scroll-behavior: smooth
+
+body
+  margin: 0
+  font-size: 18px
+  font-family: 'Public Sans', sans-serif
+  background: $very-light-gray
+
+.container
+  max-width: 1160px
+  margin: 0 auto
+  padding: 0 1.5rem
+
+.flex
+  display: flex
+  align-items: center
+  justify-content: center
+
+.flex-c
+  @extend .flex
+  flex-direction: column
+  
+.btn
+  font-family: 'Public Sans', sans-serif
+  font-size: .9rem
+  font-weight: 700
+  color: $white
+  background: $gradient
+  padding: .8rem 2.1rem
+  border: none
+  border-radius: 30px
+  cursor: pointer
+  transition: .2s ease-out  opacity
+  &:hover
+    opacity: .5
+
+ul
+  padding: 0
+  list-style-type: none
+  justify-content: space-between
+  padding: 0 .8rem
+  color: $grayish-blue
+
+  li:not(:last-child)
+    margin-right: 12px
+
+    +media_query($tablet)
+      margin-right: 0
+  
+  li:not(:first-child)
+    margin-left: 12px
+
+    +media_query($tablet)
+      margin-left: 0
+
+a
+  text-decoration: none
+  color: inherit
+  display: inline-block
+  font-size: .9rem
+
+p
+  line-height: 1.5rem
+  color: $grayish-blue
+
+img
+  max-width: 100%
+
+h1,h2,h3,h4
+  color: $dark-blue
+  font-weight: 300
+
+.grid
+  margin-top: 4rem
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr))
+  grid-gap: 1.5rem 2rem
+
+#close-icon
+  display: none
+  &.show
+    display: inline-flex
+
+.burger__menu
+  display: none
+  &.show
+    display: none
+
+  +media_query($tablet)
+    display: inline-flex
+
+// ------------------------- Header styles ------------------------------
+header
+  background: $white
+  padding: .75rem 0
+
+  +media_query($tablet)
+    padding: 1.5rem 0
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 10
+
+  .flex
+    justify-content: space-between
+
+  .nav__link
+    a
+      transition: .2s ease-out all
+      position: relative
+      &:hover
+        color: $dark-blue
+
+        &::after
+          content: ""
+          background: $gradient
+          position: absolute
+          top: 44px
+          left: 0
+          width: 100%
+          height: 4px
+
+
+
+    +media_query($tablet)
+      margin-top: 1.5rem
+      a
+        font-size: 1.3rem;
+  
+  .nav
+    position: relative
+    &__links
+      +media_query($tablet)
+        display: none
+        a:not(:first-child)
+          margin-top: 1.5rem
+      
+        &.show
+          display: flex
+          flex-direction: column
+          position: absolute
+          top: 3rem
+          left: 0
+          right: 0
+          background: white
+          padding: 2rem
+          border-radius: 7px
+          margin-left: auto 
+          margin-right: auto 
+          width: 325px
+          z-index: 10
+
+          // &::before
+          //   content: ""
+          //   background: linear-gradient(to bottom, rgba(black,.5), transparent)    
+          //   position: absolute
+          //   display: block
+          //   width: 100vw
+          //   height: 100vh
+          //   top: -1.4rem
+          //   left: -14rem
+          //   right: 0
+          //   bottom: 0
+          //   z-index: 0
+            
+    &__btn
+      +media_query($tablet)
+        display: none
+
+
+// ---------------------------- Hero styles ------------------------------
+main
+  +media_query($tablet)
+    padding-top: 4rem;
+
+.hero
+  position: relative
+  overflow-x: hidden
+  +media_query($tablet)
+    .container
+      flex-direction: column-reverse
+
+  &::before
+    content: ""
+    display: block
+    background: url("./images/bg-intro-desktop.svg") no-repeat left / cover
+    position: absolute
+    top: -31%
+    right: -4%
+    width: 54rem
+    height: 62rem
+    z-index: -1
+
+    +media_query($tablet)
+      background: url("./images/bg-intro-mobile.svg") no-repeat left / cover
+      top: -31%
+      right: -4%
+      width: 54rem
+      height: 62rem
+
+    +media_query($mobile)
+      top: -8%;
+      width: 28rem;
+      height: 26rem;
+    
+
+  &__text
+    min-height: 30rem
+    h1
+      font-size: 3.5rem
+      margin: 0
+      max-width: 420px
+    p
+      margin-top: 1.5rem
+      padding-right: 12rem
+
+    .btn
+      margin-top: .9rem
+    
+    +media_query($tablet)
+      min-height: 24rem
+      margin-top: 16rem
+      text-align: center
+      h1
+        font-size: 2.7rem
+        margin: 0 auto
+      p
+        padding: 0 20%
+
+    +media_query($mobile)
+      margin-top: 20rem
+      h1
+        font-size: 2.5rem
+      p
+        padding: 0 1.1rem
+        font-size: .9rem
+    
+  &__image
+    img
+      max-width: 170%
+      margin: -8rem 16rem 0 0
+      +media_query($tablet)
+        max-width: 100%
+        margin: -15rem 0
+      +media_query($mobile)
+        margin: -19rem 0
+
+
+// ---------------------------- Features styles ------------------------------
+.features
+  background: $light-grayish-blue
+  padding: 6rem 0
+  margin-top: -10rem
+
+
+  &__heading
+    font-size: 2.5rem
+  &__p
+    max-width: 60%
+
+  &__item
+    h3
+      font-size: 1.5rem
+    p
+      font-size: 1rem
+
+  +media_query($tablet)
+    padding: 4rem 0
+    margin-top: -1rem
+    text-align: center
+
+    &__heading
+      font-size: 2rem
+      max-width: 12rem
+      margin: 0 auto
+    &__p
+      max-width: 60%
+      margin: 1.5rem auto 0
+
+    &__item
+      h3
+        font-size: 1.5rem
+      p
+        font-size: 1rem
+
+  +media_query($mobile)
+    &__p
+      max-width: 90%
+      font-size: 1rem
+
+// ---------------------------- Article styles ------------------------------
+.article
+  padding: 4rem 0
+
+ 
+  &__heading
+    font-size: 2.5rem
+    margin-bottom: 0rem
+    +media_query($tablet)
+      text-align: center
+      font-size: 2rem
+  
+  &__cards
+    margin-top: 3rem
+    height: 50%
+
+    .content
+      padding: 1.5rem 1.5rem 0 1.5rem
+      small
+        font-size: .6rem
+        color: $grayish-blue
+      h4
+        font-size: 1rem
+        margin: .5rem 0 0
+        &:hover
+          color: $green
+          cursor: pointer
+
+
+
+      p
+        font-size: .8rem
+        max-width: 94%
+        line-height: 1.5em
+      
+      +media_query($mobile)
+        h4
+          max-width: 85%
+
+    &-single
+      justify-content: flex-start
+      background: $white
+      border-radius: 7px
+      overflow: hidden
+      box-shadow: 0px 2px 10px rgba(0,0,0,.05)
+
+      .image
+        height: 13rem;
+        width: 100%;
+
+      // looping through cards and giving each one a different background image
+      @for $i from 1 through 4
+        .img-#{$i}
+          background: url('./images/img-#{$i}.jpg') no-repeat center /cover
+
+// ---------------------------- Footer styles ------------------------------
+.footer
+  background: $dark-blue
+  padding: 3rem 0 2rem 0
+
+  .social__link
+    transition: .2s ease-out all
+    .svg:hover
+      filter: invert(0.33) sepia(1) saturate(3.8) hue-rotate(115.2deg) brightness(0.54)
+
+  .container
+    justify-content: space-between
+    align-items: flex-start
+
+    +media_query($tablet)
+      flex-direction: column
+
+  &__info
+    text-align: left
+
+    +media_query($tablet)
+      width: 100%
+      flex-direction: column
+
+      & > div
+        width: 100%
+        align-items: center
+
+    &-brand
+      align-items: flex-start
+      justify-content: center
+      
+      .social
+        padding: 3rem 0 0
+        margin: 0
+
+        &__link:not(:first-child)
+          margin-left: .5rem
+
+        +media_query($tablet)
+          padding: 2rem 0 0
+        +media_query($mobile)
+          &__link
+            img
+              width: 1.5rem
+              height: 1.5rem
+
+          &__link:not(:first-child)
+            margin-left: .8rem
+
+  &__links1, &__links2
+    color: $white
+    align-items: flex-start
+    a
+      transition: .2s ease-out color
+      &:hover
+        color: $bright-cyan
+
+    a:not(:first-child)
+      margin-top: 1rem
+
+  &__links1
+    margin-left: 7.5rem
+
+  &__links2
+    margin-left: 8rem
+
+  +media_query($tablet)
+    &__links1, &__links2
+      margin: 1.1rem 0 0
+    &__links1
+        margin-top: 2.1rem
+    
+
+  &__cta
+    text-align: right
+
+    +media_query($tablet)
+      text-align: center
+      width: 100%
+      margin-top: 2.5rem
+
+    .copyright
+      font-size: .9rem
+      padding-top: 1rem
+
